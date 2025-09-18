@@ -82,6 +82,8 @@ flowchart LR
 
 ## 3) Data Model (ER — Drawn)
 
+## 3) Data Model (ER — Drawn)
+
 ```mermaid
 erDiagram
   USERS ||--o{ FOLLOWS : follows
@@ -112,7 +114,7 @@ erDiagram
     uuid user_id FK
     uuid creator_id FK
     timestamp created_at
-    PK (user_id, creator_id)
+    string PK_user_creator // composite key (user_id + creator_id)
   }
   PRODUCTS {
     uuid id PK
@@ -173,12 +175,6 @@ erDiagram
     timestamp created_at
     timestamp processed_at
   }
-```
-
-**Notes:**  
-- `FOLLOWS` composite PK supports “is A following B?” and listing followers (index by `creator_id`).  
-- `RESERVATIONS` TTL in Redis; promote to order on payment; else auto‑release.  
-- `INVENTORY.available` updates are atomic to prevent oversell.
 
 ---
 
